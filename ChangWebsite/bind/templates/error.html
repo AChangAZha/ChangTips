@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <meta name="wechat-enable-text-zoom-em" content="true">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+    <link rel="stylesheet" href="https://res.wx.qq.com/t/wx_fed/weui-source/res/2.5.8/weui.min.css" />
+    <title>错误</title>
+</head>
+<style>
+    .page {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+</style>
+
+<body>
+    <div class="page">
+        <div class="weui-msg">
+            <div class="weui-msg__icon-area"><img src="{% static 'error.png' %}" width="120em"></div>
+            <div class="weui-msg__text-area">
+                <h2 class="weui-msg__title">数据库异常</h2>
+                <p class="weui-msg__desc">当前数据库状态异常，操作无法继续进行。请联系开发者，等待问题解决后再尝试操作。</p>
+            </div>
+            <div class="weui-form__extra-area">
+                <div class="weui-footer">
+                    <p class="weui-footer__links">
+                        <a href="/index" class="weui-footer__link">主页</a>
+                    </p>
+                    <p class="weui-footer__text">Developed by Chang</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

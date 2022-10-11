@@ -1,0 +1,50 @@
+<!--
+ * @Author: AChangAZha
+ * @Date: 2022-06-30 23:10:21
+ * @LastEditTime: 2022-08-29 15:33:49
+ * @LastEditors: AChangAZha
+-->
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <meta name="wechat-enable-text-zoom-em" content="true">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+    <link rel="stylesheet" href="https://res.wx.qq.com/t/wx_fed/weui-source/res/2.5.8/weui.min.css" />
+    <title>成功</title>
+</head>
+<style>
+    .page {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+</style>
+
+<body>
+    <div class="page">
+        <div class="weui-msg">
+            <div class="weui-msg__icon-area"><img src="{% static 'bind/dog.png' %}" width="120em"></div>
+            <div class="weui-msg__text-area">
+                <h2 class="weui-msg__title">{{ successTips }}成功</h2>
+                <p class="weui-msg__desc">{{ text }}</p>
+                <p class="weui-msg__desc"><a
+                        href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=exampleCorpid&redirect_uri=https%3A%2F%2Fchangwebsite.azurewebsites.net%2FciSettings&response_type=code&scope=snsapi_base&state=#wechat_redirect"
+                        style="color:#576b95">点我前往推送管理</a></p>
+
+            </div>
+            <div class="weui-form__extra-area">
+                <div class="weui-footer">
+                    <p class="weui-footer__links">
+                        <a href="/index" class="weui-footer__link">主页</a>
+                    </p>
+                    <p class="weui-footer__text">Developed by Chang</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

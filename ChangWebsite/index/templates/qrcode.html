@@ -1,0 +1,94 @@
+<!--
+ * @Author: AChangAZha
+ * @Date: 2022-10-05 22:59:47
+ * @LastEditTime: 2022-10-10 11:01:42
+ * @LastEditors: AChangAZha
+-->
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <meta name="wechat-enable-text-zoom-em" content="true">
+    <link rel="stylesheet" href="https://res.wx.qq.com/t/wx_fed/weui-source/res/2.5.14/weui.min.css" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
+    <title>Chang Tips</title>
+</head>
+<script>
+    function showImg(num) {
+        if (num == 0) {
+            $("#q1").show()
+        } else if (num == 1) {
+            $("#q2").show()
+        } else if (num == 2) {
+            $("#q3").show()
+        } else if (num == 3) {
+            $("#q4").show()
+        } else if (num == 4) {
+            $("#q5").show()
+        }
+    }
+    $(function () {
+        var num = parseInt(Math.random() * (4 - 0 + 1) + 0);
+        showImg(num);
+        $(".qrcode").click(function () {
+            $(".qrcode").hide();
+            num = (num + 1) % 5
+            showImg(num)
+        })
+    })
+
+</script>
+<style>
+    .page {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+</style>
+
+<body>
+    <div class="page">
+        <div class="weui-form" style="padding-top: 0px;">
+            <article class="weui-article">
+                <h1>Chang Tips</h1>
+                <section>
+                    <section>
+                        <p>
+                            <img class="qrcode" hidden id="q1" src="{% static 'index/qrcode1.jfif' %}">
+                            <img class="qrcode" hidden id="q2" src="{% static 'index/qrcode2.jfif' %}">
+                            <img class="qrcode" hidden id="q3" src="{% static 'index/qrcode3.jfif' %}">
+                            <img class="qrcode" hidden id="q4" src="{% static 'index/qrcode4.jfif' %}">
+                            <img class="qrcode" hidden id="q5" src="{% static 'index/qrcode5.jfif' %}">
+                        </p>
+                        <p>扫描二维码关注后，提示填写手机号验证身份，<b>可任意输入11位数字</b>，Chang Tips不会存储此信息。</p>
+                        <p>扫描二维码关注后，若提示“已达到当日关注人数上限”，可以<b>点击二维码进行更换</b>（共5个二维码可供扫描）；若所有二维码扫描关注后均提示达到关注人数上限，请<b>第二天</b>重新扫描二维码关注（<b>要先取消关注噢！</b>）。
+                        </p>
+                        <p>若遇到二维码过期，请通过邮箱changtips@foxmail.com联系开发者更新二维码。或者你也可以让身边已经关注的同学分享给你噢。</p>
+                    </section>
+                    <h2 id="share">分享方法</h2>
+                    <section>
+                        <p>【Chang Tips】-【右上角+】-【设置】-【右上角···】-【推荐给朋友】
+                        </p>
+                        <p>
+                            <img src="{% static 'index/share1.jpeg' %}">
+                        </p>
+                        <p>
+                            <img src="{% static 'index/share2.jpeg' %}">
+                        </p>
+                    </section>
+                </section>
+            </article>
+            <div class="weui-footer" style="padding-bottom: calc(32px + env(safe-area-inset-bottom));">
+                <p class="weui-footer__links">
+                    <a href="/index" class="weui-footer__link">主页</a>
+                </p>
+                <p class="weui-footer__text">Developed by Chang</p>
+            </div>
+        </div>
+    </div>
+</body>

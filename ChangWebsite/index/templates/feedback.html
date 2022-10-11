@@ -1,0 +1,90 @@
+<!--
+ * @Author: AChangAZha
+ * @Date: 2022-10-05 22:59:47
+ * @LastEditTime: 2022-10-10 11:34:37
+ * @LastEditors: AChangAZha
+-->
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <meta name="wechat-enable-text-zoom-em" content="true">
+    <link rel="stylesheet" href="https://res.wx.qq.com/t/wx_fed/weui-source/res/2.5.14/weui.min.css" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+    <title>反馈有礼</title>
+</head>
+<style>
+    .page {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+</style>
+
+<body>
+    <div class="page">
+        <div class="weui-form" style="padding-top: 0px;">
+            <article class="weui-article">
+                <h1>Chang Tips 反馈有礼</h1>
+                <section>
+                    <section>
+                        <p>如果有任何的问题与建议，欢迎通过下方的联系方式联系作者。</p>
+                        <p>由于本人学业繁忙，没有太多精力维护该项目，若想接盘我的屎山代码，也欢迎联系作者。</p>
+                        <p>希望大家能够积极反馈使用情况，如果遇到Bug，或者有任何建议和想法，请告诉我，有机会获得奖励哦！</p>
+                    </section>
+                    <h2>联系方式</h2>
+                    <section>
+                        <ul>
+                            <li>
+                                微信内发送消息
+                            </li>
+                            <p>在微信内发送反馈或建议消息即可，文字、图片、视频、链接消息均可；若长时间没有收到作者回复，可通过邮箱方式联系作者。</p>
+                            <p>下方四个页面内均可发送反馈或建议消息（悄悄告诉你，还可以参与抽奖哦）：</p>
+                            <p>
+                                <img src="{% static 'index/fb1.jpeg' %}">
+                            </p>
+                            <p>
+                                <img src="{% static 'index/fb2.png' %}">
+                            </p>
+                            <p>当你看到中奖通知，那么恭喜你中奖啦！</p>
+                            <p>
+                                请勿发送无意义的消息或与本项目无关的消息，若多次故意违反将被拉黑，不能再参与抽奖。
+                            </p>
+                            <li>
+                                邮箱
+                            </li>
+                            <p>
+                                changtips@foxmail.com
+                            </p>
+                            <li>
+                                腾讯兔小巢
+                            </li>
+                            <p><a class="weui-a11y-combo__content weui-link weui-wa-hotarea "
+                                    href="https://support.qq.com/product/439480">https://support.qq.com/product/439480</a>
+                            </p>
+                            <li>
+                                GitHub
+                            </li>
+                            <p><a class="weui-a11y-combo__content weui-link weui-wa-hotarea "
+                                    href="https://github.com/AChangAZha/ChangTips">https://github.com/AChangAZha/ChangTips</a>
+                            </p>
+                            <p>
+                                提交issues或pull request
+                            </p>
+                        </ul>
+                    </section>
+                </section>
+            </article>
+            <div class="weui-footer" style="padding-bottom: calc(32px + env(safe-area-inset-bottom));">
+                <p class="weui-footer__links">
+                    <a href="/index" class="weui-footer__link">主页</a>
+                </p>
+                <p class="weui-footer__text">Developed by Chang</p>
+            </div>
+        </div>
+    </div>
+</body>

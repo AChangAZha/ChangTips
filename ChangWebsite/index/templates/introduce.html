@@ -1,0 +1,154 @@
+<!--
+ * @Author: AChangAZha
+ * @Date: 2022-10-05 22:59:47
+ * @LastEditTime: 2022-10-08 09:43:15
+ * @LastEditors: AChangAZha
+-->
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <meta name="wechat-enable-text-zoom-em" content="true">
+    <link rel="stylesheet" href="https://res.wx.qq.com/t/wx_fed/weui-source/res/2.5.14/weui.min.css" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+    <title>Chang Tips</title>
+</head>
+<style>
+    .page {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+</style>
+
+<body>
+    <div class="page">
+        <div class="weui-form" style="padding-top: 0px;">
+            <article class="weui-article">
+                <h1>Chang Tips</h1>
+                <section>
+                    <h2>概述</h2>
+                    <section>
+                        <p>Chang Tips是一个使用Python开发，以企业微信为推送渠道的提醒推送工具，向同学们提供校内各项事务提醒服务。</p>
+                    </section>
+                    <h2>主要功能</h2>
+                    <section>
+                        <ul>
+                            <li>
+                                校内疫情打卡提醒：定时检测当日的打卡状态，重复提醒用户及时打卡，直至打卡完成后停止推送。
+                            </li>
+                            <li>
+                                作业提醒：定时检查用户未完成的作业、讨论、考试，提前提醒；检查老师布置的新任务并及时通知；一键查看最近需要完成的任务。
+                            </li>
+                            <li>
+                                看起来不怎么聪明的机器人：在微信就可以查阅天气、百科等实用信息。
+                            </li>
+                            <li>更多功能正在新建文件夹中...</li>
+                        </ul>
+                    </section>
+                    <h2>使用方法</h2>
+                    <section>
+                        <p>1.使用微信扫一扫二维码，关注公众号（<a class="weui-a11y-combo__content weui-link weui-wa-hotarea "
+                                href="/qrcode">点我获取二维码</a>）</p>
+                        <p>
+                            2.关注后提示填写手机号验证身份，可任意输入11位数字，Chang Tips不会存储此信息
+                        </p>
+                        <p>
+                            <img src="{% static 'index/step1.jpeg' %}">
+                        </p>
+                        <p>
+                            <img src="{% static 'index/step2.jpeg' %}">
+                        </p>
+                        <p>
+                            3.验证通过后，点击进入需要提醒的功能（如“莞工疫情打卡提醒”），点击下方菜单栏的“绑定账号”按钮，绑定账号后即可接收提醒
+                        </p>
+                        <p>
+                            <img src="{% static 'index/step3.jpeg' %}">
+                        </p>
+                        <p>
+                            4.Enjoy it!
+                        </p>
+                    </section>
+                    <h2>帮助与支持</h2>
+                    <section>
+                        <ul>
+                            <li>常见问题：<a class="weui-a11y-combo__content weui-link weui-wa-hotarea "
+                                    href="https://changwebsite.azurewebsites.net/qa">https://changwebsite.azurewebsites.net/qa</a>
+                            </li>
+                            <li>反馈有礼：<a class="weui-a11y-combo__content weui-link weui-wa-hotarea "
+                                    href="https://changwebsite.azurewebsites.net/feedback">https://changwebsite.azurewebsites.net/feedback</a>
+                            </li>
+                        </ul>
+                    </section>
+                    <h2>工作原理</h2>
+                    <section>
+                        <p>
+                            <img src="{% static 'index/modules.png' %}">
+                        </p>
+                        <p>
+                            项目网站使用Python
+                            Web框架Django开发，前端样式使用了同微信原生视觉体验一致的基础样式库WeUI。网站部署在云服务器，用户可以通过微信公众号菜单栏访问。
+                        </p>
+                        <p>
+                            用户进入绑定账号页面填写第三方平台账号信息，将账号信息交由相应模块处理，绑定成功后，将用户账号信息以及相应平台的cookie/token加密存储至数据库。
+                        </p>
+                        <p>
+                            定时提醒脚本模块使用Python编写。通过腾讯云函数服务可以定时触发“获取用户事务”模块，携带cookie/token向相应平台请求用户的事务。
+                        </p>
+                        <p>
+                            调用企业微信相应API，向用户推送提醒消息；用户即可在微信客户端接收提醒消息。
+                        </p>
+                        <p>
+                            用户可随时访问取消绑定页面，请求停止服务，并删除数据库中用户的账号信息。
+                        </p>
+                        <p>
+                            <img src="{% static 'index/process.png' %}">
+                        </p>
+                    </section>
+                    <h2>引用的开源项目</h2>
+                    <section>
+                        <p>WeUI：<a class="weui-a11y-combo__content weui-link weui-wa-hotarea "
+                                href="https://github.com/Tencent/weui">https://github.com/Tencent/weui</a></p>
+                        <p>企业微信官方API：<a class="weui-a11y-combo__content weui-link weui-wa-hotarea "
+                                href="https://github.com/sbzhu/weworkapi_python">https://github.com/sbzhu/weworkapi_python</a>
+                        </p>
+                    </section>
+                    <h2>开源仓库</h2>
+                    <section>
+                        <p>为保护用户的个人信息，部分功能代码相关细节恕不提供。开发者承诺该项目不会泄露用户个人信息以及将其用作其他用途。感谢您的理解、支持与信任！</p>
+                        <p>GitHub：<a class="weui-a11y-combo__content weui-link weui-wa-hotarea "
+                                href="https://github.com/AChangAZha/ChangTips">https://github.com/AChangAZha/ChangTips</a>
+                        </p>
+                        <p>
+                            如果你觉得Chang Tips还不错，不妨给我点个小星星吧！
+                        </p>
+                    </section>
+                    <h2>特别声明</h2>
+                    <section>
+                        <ul>
+                            <li>
+                                该项目及其代码仅用于测试和学习研究，禁止用于商业用途。
+                            </li>
+                            <li>
+                                用户直接或间接使用或传播该项目及其代码，开发者均不对上述行为产生的任何后果负责。
+                            </li>
+                            <li>
+                                该项目不会泄露用户个人信息以及将其用作其他用途。
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+            </article>
+            <div class="weui-footer" style="padding-bottom: calc(32px + env(safe-area-inset-bottom));">
+                <p class="weui-footer__links">
+                    <a href="/index" class="weui-footer__link">主页</a>
+                </p>
+                <p class="weui-footer__text">Developed by Chang</p>
+            </div>
+        </div>
+    </div>
+</body>
