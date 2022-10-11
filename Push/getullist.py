@@ -29,7 +29,14 @@ def ULEARNING(wxID):
         wxID)
     DB.ping(reconnect=True)
     cursor.execute(sql)
-    UlearningAUTHORIZATION = cursor.fetchone()[0]
+    try:
+        UlearningAUTHORIZATION = cursor.fetchone()[0]
+        if not UlearningAUTHORIZATION:
+            cursor.close()
+            return {"error": "1"}
+    except:
+        cursor.close()
+        return {"error": "1"}
     sql = "SELECT UlearningID2 FROM user WHERE WeChatName='%s'" % (wxID)
     DB.ping(reconnect=True)
     cursor.execute(sql)
@@ -56,9 +63,6 @@ def ULEARNING(wxID):
         DB.ping(reconnect=True)
         cursor.execute(sql)
         PWD = cursor.fetchone()[0]
-        if not PWD or not ID:
-            cursor.close()
-            return {"error": "1"}
         data = {
             "ID": ID,
             "PWD": PWD,
