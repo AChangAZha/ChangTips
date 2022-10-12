@@ -7,7 +7,6 @@ from functools import cmp_to_key
 import pymysql
 import traceback
 import sys
-now = time.time()
 DB = pymysql.connect(host='localhost',
                      port=0000,
                      user='user',
@@ -22,7 +21,7 @@ type = {
 num = ""
 
 
-def ULEARNING(wxID, Bind=False, Create=False, Morning=False, Night=False, Preview0=False, Week=False, TwoDays=False, Exam=False, Exam_2=False, UlearningAUTHORIZATION="", UlearningID2=""):
+def ULEARNING(wxID, now, Bind=False, Create=False, Morning=False, Night=False, Preview0=False, Week=False, TwoDays=False, Exam=False, Exam_2=False, UlearningAUTHORIZATION="", UlearningID2=""):
     DB.ping(reconnect=True)
     cursor = DB.cursor()
     try:
@@ -403,6 +402,7 @@ def ULEARNING(wxID, Bind=False, Create=False, Morning=False, Night=False, Previe
 
 
 def main_handler(event, context):
+    now = time.time()
     if "Type" in event.keys():
         if event["Type"] == "Timer":
             DB.ping(reconnect=True)
@@ -411,23 +411,25 @@ def main_handler(event, context):
             DB.ping(reconnect=True)
             cursor.execute(sql)
             rows = cursor.fetchall()
+            startDate = time.strftime("%Y-%m-%d", time.localtime(now+28800))
+            now = nowtime(event, startDate)
             for row in rows:
                 if event["TriggerName"] == "Create":
-                    ULEARNING(row[0], Create=True)
+                    ULEARNING(row[0], now, Create=True)
                 if event["TriggerName"] == "Morning":
-                    ULEARNING(row[0], Morning=True)
+                    ULEARNING(row[0], now, Morning=True)
                 if event["TriggerName"] == "Night":
-                    ULEARNING(row[0], Night=True)
+                    ULEARNING(row[0], now, Night=True)
                 if event["TriggerName"] == "Preview0":
-                    ULEARNING(row[0], Preview0=True)
+                    ULEARNING(row[0], now, Preview0=True)
                 if event["TriggerName"] == "Week":
-                    ULEARNING(row[0], Week=True)
+                    ULEARNING(row[0], now, Week=True)
                 if event["TriggerName"] == "TwoDays":
-                    ULEARNING(row[0], TwoDays=True)
+                    ULEARNING(row[0], now, TwoDays=True)
                 if event["TriggerName"] == "Exam":
-                    ULEARNING(row[0], Exam=True)
+                    ULEARNING(row[0], now, Exam=True)
                 if event["TriggerName"] == "Exam_2":
-                    ULEARNING(row[0], Exam_2=True)
+                    ULEARNING(row[0], now, Exam_2=True)
             cursor.close()
             DB.close()
     if "requestContext" not in event.keys():
@@ -439,9 +441,37 @@ def main_handler(event, context):
         UlearningAUTHORIZATION = event["queryStringParameters"]["UlearningAUTHORIZATION"]
         UlearningID2 = event["queryStringParameters"]["UlearningID2"]
         json = ULEARNING(
-            WXID, Bind=True, UlearningAUTHORIZATION=UlearningAUTHORIZATION, UlearningID2=UlearningID2)
+            WXID, int(now), Bind=True, UlearningAUTHORIZATION=UlearningAUTHORIZATION, UlearningID2=UlearningID2)
         DB.close()
         return json
+
+
+def nowtime(event, startDate):
+    if event["TriggerName"] == "Create":
+        now = int(time.mktime(time.strptime(
+            startDate+" 23:00", '%Y-%m-%d %H:%M'))-28800)
+    if event["TriggerName"] == "Morning":
+        now = int(time.mktime(time.strptime(
+            startDate+" 07:00", '%Y-%m-%d %H:%M'))-28800)
+    if event["TriggerName"] == "Night":
+        now = int(time.mktime(time.strptime(
+            startDate+" 18:20", '%Y-%m-%d %H:%M'))-28800)
+    if event["TriggerName"] == "Preview0":
+        now = int(time.mktime(time.strptime(
+            startDate+" 18:01", '%Y-%m-%d %H:%M'))-28800)
+    if event["TriggerName"] == "Week":
+        now = int(time.mktime(time.strptime(
+            startDate+" 07:03", '%Y-%m-%d %H:%M'))-28800)
+    if event["TriggerName"] == "TwoDays":
+        now = int(time.mktime(time.strptime(
+            startDate+" 18:00", '%Y-%m-%d %H:%M'))-28800)
+    if event["TriggerName"] == "Exam":
+        now = int(time.mktime(time.strptime(
+            startDate+" 07:05", '%Y-%m-%d %H:%M'))-28800)
+    if event["TriggerName"] == "Exam_2":
+        now = int(time.mktime(time.strptime(
+            startDate+" 18:10", '%Y-%m-%d %H:%M'))-28800)
+    return now
 
 
 def cmp_deadline(hw_1, hw_2):
