@@ -7,6 +7,7 @@ import pymysql
 import traceback
 import sys
 now = time.time()
+startDate = time.strftime("%Y-%m-%d", time.localtime(now+28800))
 num = ""
 DB = pymysql.connect(host='localhost',
                      port=0000,
@@ -262,6 +263,7 @@ def main_handler(event, context):
             DB.ping(reconnect=True)
             cursor.execute(sql)
             rows = cursor.fetchall()
+            nowtime(event)
             for row in rows:
                 if event["TriggerName"] == "Create":
                     HWCSS(row[0], Create=True)
@@ -287,6 +289,27 @@ def main_handler(event, context):
         json = HWCSS(WXID, Bind=True, HomeworkSESSION=HomeworkSESSION)
         DB.close()
         return json
+
+
+def nowtime(event):
+    global now
+    if event["TriggerName"] == "Create":
+        now = int(now)
+    if event["TriggerName"] == "ThreeDays":
+        now = int(time.mktime(time.strptime(
+            startDate+" 19:00", '%Y-%m-%d %H:%M'))-28800)
+    if event["TriggerName"] == "Week":
+        now = int(time.mktime(time.strptime(
+            startDate+" 09:00", '%Y-%m-%d %H:%M'))-28800)
+    if event["TriggerName"] == "Preview0":
+        now = int(time.mktime(time.strptime(
+            startDate+" 22:00", '%Y-%m-%d %H:%M'))-28800)
+    if event["TriggerName"] == "Night":
+        now = int(time.mktime(time.strptime(
+            startDate+" 14:30", '%Y-%m-%d %H:%M'))-28800)
+    if event["TriggerName"] == "Morning":
+        now = int(time.mktime(time.strptime(
+            startDate+" 06:58", '%Y-%m-%d %H:%M'))-28800)
 
 
 def cmp_deadline(hw_1, hw_2):
