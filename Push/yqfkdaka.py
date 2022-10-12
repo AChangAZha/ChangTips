@@ -173,9 +173,9 @@ def main_handler(event, context):
                             "https://example.tencentcs.com/release/push/textcard", data=data)
             else:
                 if event["TriggerName"] == "Tips23":
-                    sql = "SELECT user.WeChatName FROM user, cisettings_ci WHERE user.NAME = cisettings_ci.NAME AND user.WeChatName NOT IN (SELECT WeComID FROM yqfkdaka) AND DakaBEARER <> ''"
+                    sql = "SELECT user.NAME FROM user WHERE user.NAME NOT IN ( SELECT WeComID FROM yqfkdaka ) AND BEARER <> ''"
                 else:
-                    sql = "SELECT user.WeChatName FROM user, cisettings_ci WHERE user.NAME = cisettings_ci.NAME AND user.WeChatName NOT IN (SELECT WeComID FROM yqfkdaka) AND DakaBEARER <> '' AND continued = '1'"
+                    sql = "SELECT user.NAME FROM user WHERE user.NAME NOT IN ( SELECT WeComID FROM yqfkdaka ) AND BEARER <> '' AND ( user.NAME NOT IN ( SELECT NAME FROM cisettings_ci ) OR user.NAME IN ( SELECT NAME FROM cisettings_ci WHERE continued = '1' ))"
                 DB.ping(reconnect=True)
                 cursor.execute(sql)
                 rows = cursor.fetchall()
