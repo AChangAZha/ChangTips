@@ -37,8 +37,8 @@ def push_2(list, data, msg):
     title = data["title"]
     for i in list:
         courseName = i["courseName"]
-        data["title"] = "【" + title+"】"+courseName+"  "+homeworkName
         homeworkName = i["homeworkName"]
+        data["title"] = "【" + title+"】"+courseName+"  "+homeworkName
         deadlineDate = i["deadlineDate"]
         data["message"] = msg + \
             f"<br>课程名称：{courseName}<br>作业名称：{homeworkName}<br>截止时间：{deadlineDate}"
@@ -339,7 +339,7 @@ def dayOfTheWeek(deadlineDate):
     if stime.tm_hour >= 0 and stime.tm_hour <= 6:
         dayOfTheWeek = " "+week_list[stime.tm_wday]+"凌晨" + "<br>注意！该作业需要在  " + \
             week_list[stime.tm_wday-1]+"晚上 或 " + \
-            week_list[stime.tm_wday]+"凌晨 提交。"
+            week_list[stime.tm_wday]+"凌晨 前提交。"
     elif stime.tm_hour > 6 and stime.tm_hour <= 12:
         dayOfTheWeek = " "+week_list[stime.tm_wday]+"早上"
     elif stime.tm_hour > 12 and stime.tm_hour < 18:
