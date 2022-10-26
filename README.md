@@ -20,7 +20,7 @@ Chang Tips是一个使用Python开发，以企业微信为推送渠道的提醒�
 
 3.验证通过后，点击进入需要提醒的功能（如“优学院任务提醒”），点击下方菜单栏的“绑定账号”按钮，绑定账号后即可接收提醒
 
-<img src="https://changwebsite.azurewebsites.net/static/index/step3.eb31c6abe56b.jpeg" width="50%">
+<img src="https://changwebsite.azurewebsites.net/static/index/step3.e16a25a6d402.jpeg" width="50%">
 
 4.Enjoy it!
 
